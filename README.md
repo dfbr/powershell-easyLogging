@@ -20,5 +20,8 @@ or
 - `Log-Data -entries "here is my log entry" | Write-Verbose`
 This way you get to both log data and have it displayed to the console in one line
 
-## License
-Just use it. I don't mind.
+## Inputs
+An array of strings
+
+## Outputs
+An array of strings
