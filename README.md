@@ -11,7 +11,7 @@ File is either a default file (one per day) or a filename that you specify. Info
 
 ## Example usage
 In your script you can...
-- `Import-module Log-Data.psm1` to import
+- `Import-module Log-Data.psm1` to import (because I'm naughty with verbs you may want to add `-DisableNameChecking`
 - To log something you can `Log-Data -entries "first log entry", "second log entry" -type "WARNING"`
 
 You can also us it with pipes both in and out, e.g.
