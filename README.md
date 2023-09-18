@@ -17,7 +17,7 @@ In your script you can...
 You can also us it with pipes both in and out, e.g.
 - `"first Log entry", "second log entry" | Log-Data | Write-Verbose`
 or
-- `Log-Data -entries "here is my log entry" | Write-Verbose
+- `Log-Data -entries "here is my log entry" | Write-Verbose`
 This way you get to both log data and have it displayed to the console in one line
 
 ## License
