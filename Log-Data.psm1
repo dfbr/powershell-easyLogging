@@ -15,6 +15,9 @@ String. Either "INFO", "WARNING" or "ERROR"
 .PARAMETER logFile
 String. The name of the logfile if you don't want it going to the default. If it doesn't exist we'll try and create it.
 
+.PARAMETER quiet
+Quiet stops a return value being sent so that there is no output
+
 .OUTPUTS
 Returns the entries so that you can pipe them into something like write-host or write-verbose
 
@@ -29,7 +32,9 @@ Function Log-Data {
         [ValidateSet("INFO","WARNING","ERROR")]
         [String] $type = "INFO",
         [Parameter(Mandatory = $false, Position = 2)]
-        [String] $logFile
+        [String] $logFile,
+        [Parameter(Mandatory = $false, Position = 3)]
+        [Bool] $quiet
     )
 
     #region set logfile
@@ -39,8 +44,7 @@ Function Log-Data {
         {
             # no value for logFile was set so we need to define it here
             # default logfile, one per day in our logging directory
-            $logFilePrefix = "C:\sikkerhetsInformasjon\logs\"
-            $logFilePrefix = ".\"                               # temp fix for local development
+            $logFilePrefix = "C:\logs\"
             $logFileName = (get-date -format yyyyMMdd) + ".log"
             $logFile = $logFilePrefix + $logFileName
         }
@@ -87,7 +91,8 @@ Function Log-Data {
                 type = $type;
                 entry = $entry;
                 username = ([System.Security.Principal.WindowsIdentity]::GetCurrent().Name);
-                scriptname = ($MyInvocation.MyCommand);
+                scriptname = ($PSCommandPath);
+                workingDirectory = (Get-Location)
                 commandlineOptions = $parameters
             }
         
@@ -102,8 +107,16 @@ Function Log-Data {
     #region return the entries so that the next command can deal with them
     END {
         # return the array
-        return $toReturn
+        if (-Not $quiet)
+        {
+            return $toReturn
+        }
+        else
+        {
+            return
+        }
     }   
     #endregion
     
 }
+
