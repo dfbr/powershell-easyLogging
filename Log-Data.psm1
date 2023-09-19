@@ -28,7 +28,7 @@ Function Log-Data {
         [Parameter(Mandatory = $false, Position = 1)]
         [ValidateSet("INFO","WARNING","ERROR")]
         [String] $type = "INFO",
-        [Parameter(Mandatory = $false, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 2)]
         [String] $logFile
     )
 
